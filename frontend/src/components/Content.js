@@ -10,12 +10,35 @@ import Instructions from './Instructions';
           Then complete the rest of your app before attempting to
           refactor to get this Content component to work.
 */
+
+
+
+
+
+
+
 class Content extends Component {
-  renderContent = () => {
-    if (false) {
-      return <NoteEditor />;
-    } else if (false) {
-      return <NoteViewer />;
+
+ latestClick = this.props.latestClick
+
+
+  renderContent = (latestClick) => {
+    console.log(latestClick)
+    if (this.props.latestClick==="EditNote") {
+      return <NoteEditor 
+                        currNote={this.props.currNote}
+                        currBody={this.props.currBody}
+                        currTitle={this.props.currTitle} 
+                        editNote={this.props.editNote}
+                        latestClick={this.props.latestClick}    
+            />;
+    } else if (this.props.latestClick==="ShowNote") {
+      return <NoteViewer 
+                          currNote={this.props.currNote}
+                          editNote={this.props.editNote}
+                          showNote={this.props.showNote}
+                          latestClick={this.props.latestClick}
+             />;
     } else {
       return <Instructions />;
     }

@@ -1,10 +1,28 @@
 import React from 'react';
 
-const NoteList = (props) => (
-  <li>
-    <h2>Title</h2>
-    <p>Caption...</p>
-  </li>
-);
+//Get the 3 words of a note
+const truncateNote= (noteBody) => {
 
-export default NoteList;
+  let noteWordsArray = noteBody.split(" ")
+  //take first 3 words of array 
+  let firstThreeWords = noteWordsArray.splice(0, 3)
+  
+  //create string of first 3 words 
+  let threeWords = firstThreeWords.join()
+
+  //set caption after removing commas, adding space b/w words 
+  var caption = threeWords.replace(/,/g, ' ');
+  
+  caption+= '...'
+  return caption
+}
+const NoteItem= (props) => {
+  return(
+  <li onClick={()=>props.showNote(props.currNote)}>
+    <h2>{props.currNote.title}</h2>
+    <p>{truncateNote(props.currNote.body)}</p>
+  </li>
+      );
+  }
+
+export default NoteItem;
