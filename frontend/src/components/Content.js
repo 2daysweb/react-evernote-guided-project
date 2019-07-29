@@ -11,16 +11,9 @@ import Instructions from './Instructions';
           refactor to get this Content component to work.
 */
 
-
-
-
-
-
-
 class Content extends Component {
 
  latestClick = this.props.latestClick
-
 
   renderContent = (latestClick) => {
     console.log(latestClick)
@@ -30,6 +23,7 @@ class Content extends Component {
                         currBody={this.props.currBody}
                         currTitle={this.props.currTitle} 
                         editNote={this.props.editNote}
+                        saveNote={this.props.saveNote} 
                         latestClick={this.props.latestClick}    
             />;
     } else if (this.props.latestClick==="ShowNote") {

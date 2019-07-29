@@ -41,32 +41,49 @@ class NoteContainer extends Component {
     this.setState({changesCount:this.state.changesCount+=1})
     let startTitle = e.target.parentElement.children[0].innerText    
     let startBody = e.target.parentElement.children[1].innerText    
-    debugger 
+
     //change latestClick to "edit"
     this.setState({latestClick: "EditNote"})
     this.setState({currTitle:startTitle})
-    debugger 
+
     this.setState({currBody:startBody})
 
     }
 
     else {
-    
-    let currTitle = ""
+      debugger 
+    let currTitle = e.target.parentElement.children[0].value 
     let currBody = e.target.value 
     this.setState({currBody:currBody})
+    this.setState({currTitle:currTitle})
     }
 
   }
 
   handleClickSaveBtn = (currNote) => {
-    let id = currNote.id 
-    //find the note by ID
-    //find the PATCH syntax and execute it 
-    this.setState({currNote:currNote})
-    this.setState({latestClick:"SaveNote"})
-    //Make patch request to update the record specifed 
-  }
+  
+    let id = this.state.currNote.id 
+    //get new current title from editNote view 
+    let newTitle=currNote.target.parentElement.parentElement[0].value 
+    //get new current body from editNote view 
+    let newBody=currNote.target.parentElement.parentElement[1].value 
+    let currUserId = 2
+    let newNote = {title:newTitle, body:newBody, user_id:currUserId}
+    let URL = BASE_URL+'api/v1/notes/'+id
+    console.log(URL)
+   
+
+    return fetch(URL, {
+      method:'PATCH',
+      headers:{
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+      },
+      body: JSON.stringify(newNote), // body data type must match "Content-Type" header
+  })
+  .then(response => response.json())
+  .then(data => console.log(data)); // parses JSON response into native JavaScript objects 
+}
 
   handleClickCancelBtn = () => {
     //Return to content of curr note 
@@ -89,10 +106,10 @@ class NoteContainer extends Component {
                   currNote={this.state.currNote}
                   editNote={this.handleClickEditBtn}
                   showNote={this.handleClickShowNote}
+                  saveNote={this.handleClickSaveBtn}
                   currTitle={this.state.currTitle}
                   currBody={this.state.currBody}
                   latestClick={this.state.latestClick}
-
           />
         </div>
       </Fragment>
