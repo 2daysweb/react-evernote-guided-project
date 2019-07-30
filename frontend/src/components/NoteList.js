@@ -1,15 +1,25 @@
-import React from 'react';
+import React, {Component} from 'react';
 import NoteItem from './NoteItem';
 
-const NoteList = (props) => {
+
+
+
+class NoteList extends Component {
+
+  // componentDidUpdate(prevProps){
+
+  // }
+
+  render(){
   return (
     <ul>
-      {props.allNotes.map(note => <NoteItem 
+      {this.props.filteredNotes.map(note => <NoteItem 
                                               currNote={note}
-                                              showNote={props.showNote}
+                                              showNote={this.props.showNote}
                                   />)}
     </ul>
   );
+}
 }
 
 export default NoteList;

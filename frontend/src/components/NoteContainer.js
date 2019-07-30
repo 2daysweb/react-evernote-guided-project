@@ -4,6 +4,8 @@ import Sidebar from './Sidebar';
 import Content from './Content';
 
 const BASE_URL = 'http://localhost:3000/'
+//Static, only updates on "Component Did Mount" --- Avoids the problem of the new "allNotes" filtering  
+
 
 class NoteContainer extends Component {
 
@@ -11,6 +13,7 @@ class NoteContainer extends Component {
     super()
     this.state={
       allNotes:[],
+      // filteredNotes:[],
       currNote:{},
       currBody:"",
       currTitle:"",
@@ -22,19 +25,35 @@ class NoteContainer extends Component {
   componentDidMount(){
     fetch(BASE_URL+'api/v1/notes')
     .then(resp => resp.json())
-    .then(notesArray=> this.setState({allNotes:notesArray}))
+    .then(notesArray=> {
+                      this.setState({allNotes:notesArray})
+                      // this.setState({filteredNotes:notesArray})
+            })
   }
 
-  handleChangeSearchText = (e) => {
- 
-    this.setState({searchText:e.target.value})
-    //Update "all notes" to only return filtered notes based on Note Title 
-    let filteredNotes =   this.state.allNotes.filter(note => {
-      return note.title.includes(this.state.searchText)
-    })
 
-    this.setState({allNotes:filteredNotes})
-  
+getFilteredNotes = () => {
+  let allNotes = [...this.state.allNotes]
+  console.log("ALL NOTES LOCAL VAR", allNotes)
+  let newFilteredNotes = allNotes.filter(note => {
+    return note.title.toLowerCase().includes(this.state.searchText.toLowerCase())
+  })
+
+  return newFilteredNotes
+
+      //NEW FILTEREDNOTES ARRAY
+      // this.setState({filteredNotes:[...newFilteredNotes]}, ()=>console.log("NEW!!! FILTERED NOTES STATE ARRAY", this.state.filteredNotes))
+      
+}
+
+  handleChangeSearchText = (e) => {
+    console.log("FILTERED NOTES STATE ARRAY", this.state.filteredNotes)
+   
+    //ALL NOTES ARRAY:
+    // console.log("ALL NOTES STATE ARRAY", this.state.allNotes)
+    this.setState({searchText:e.target.value}, this.getFilteredNotes)
+    // debugger 
+    //Update "all notes" to only return filtered notes based on Note Title 
   }
 
   //Refactor the SetState to be only one single object --- with KV pairs
@@ -112,7 +131,8 @@ handleClickNewBtn = () => {
 .then(response => response.json())
 .then(noteObj => 
   {
-    this.setState({allNotes: [...this.state.allNotes, noteObj]}) // parses JSON response into native JavaScript objects 
+    console.log(noteObj)
+    // this.setState({allNotes: [...this.state.allNotes, noteObj]}) // parses JSON response into native JavaScript objects 
 
 });
 }
@@ -131,6 +151,7 @@ handleClickNewBtn = () => {
         <div className='container'>
           <Sidebar 
                   allNotes={this.state.allNotes}
+                  filteredNotes={this.getFilteredNotes()}
                   showNote={this.handleClickShowNote} 
                   currNote={this.state.currNote}
                   newNote={this.handleClickNewBtn}
