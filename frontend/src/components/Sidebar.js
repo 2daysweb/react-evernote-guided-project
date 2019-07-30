@@ -11,7 +11,7 @@ class Sidebar extends Component {
                  editNote={this.props.editNote}
                  currNote={this.props.currNote}
         />
-        <button>New</button>
+        <button onClick={this.props.newNote}>New</button>
       </div>
     );
   }

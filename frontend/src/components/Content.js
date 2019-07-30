@@ -23,6 +23,8 @@ class Content extends Component {
                         currBody={this.props.currBody}
                         currTitle={this.props.currTitle} 
                         editNote={this.props.editNote}
+                        handleChangeTextArea={this.props.handleChangeTextArea}
+                        handleChangeInput={this.props.handleChangeInput}
                         saveNote={this.props.saveNote} 
                         latestClick={this.props.latestClick}    
             />;
