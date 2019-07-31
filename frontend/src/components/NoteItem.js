@@ -1,9 +1,9 @@
 import React from 'react';
 
 //Get the 3 words of a note
-const truncateNote= (noteBody) => {
+const truncateNote= (noteTitle) => {
 
-  let noteWordsArray = noteBody.split(" ")
+  let noteWordsArray = noteTitle.split(" ")
   //take first 3 words of array 
   let firstThreeWords = noteWordsArray.splice(0, 3)
   
@@ -20,7 +20,7 @@ const NoteItem= (props) => {
   return(
   <li onClick={()=>props.showNote(props.currNote)}>
     <h2>{props.currNote.title}</h2>
-    <p>{truncateNote(props.currNote.body)}</p>
+    <p>{truncateNote(props.currNote.title)}</p>
   </li>
       );
   }

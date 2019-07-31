@@ -23,12 +23,15 @@ class NoteContainer extends Component {
   }
 
   componentDidMount(){
-    fetch(BASE_URL+'api/v1/notes')
+    fetch(BASE_URL+'api/v1/jobs')
     .then(resp => resp.json())
     .then(notesArray=> {
-                      this.setState({allNotes:notesArray})
+
+
+                     this.setState({allNotes:notesArray})
                       // this.setState({filteredNotes:notesArray})
-            })
+    })
+            
   }
 
 
@@ -46,6 +49,8 @@ getFilteredNotes = () => {
       
 }
 
+
+
   handleChangeSearchText = (e) => {
     console.log("FILTERED NOTES STATE ARRAY", this.state.filteredNotes)
    
@@ -59,7 +64,7 @@ getFilteredNotes = () => {
   //Refactor the SetState to be only one single object --- with KV pairs
   handleClickShowNote= (currNote) => {
     this.setState({currNote:currNote})
-    this.setState({currBody:currNote.body})
+    this.setState({currBody:currNote.employer})
     this.setState({currTitle:currNote.title})
     this.setState({latestClick:"ShowNote"})
   }
@@ -85,16 +90,24 @@ getFilteredNotes = () => {
     this.setState({currBody:currBody})
   }
 
-  handleClickSaveBtn = (currNote) => {
-  
-    let id = this.state.currNote.id 
+  handleClickSaveBtn = () => {
+
+    let id = this.state.currNote.id
+    console.log("Current Job ID", id) 
+    debugger 
     //get new current title from editNote view 
-    let newTitle=currNote.target.parentElement.parentElement[0].value 
+
+    let newTitle=this.state.currTitle
+    console.log("Current Title",newTitle) 
     //get new current body from editNote view 
-    let newBody=currNote.target.parentElement.parentElement[1].value 
-    let currUserId = 2
-    let newNote = {title:newTitle, body:newBody, user_id:currUserId}
-    let URL = BASE_URL+'api/v1/notes/'+id
+  
+    let newBody=this.state.currBody
+    console.log("Current Body",newBody) 
+
+
+    let currUserId = 16
+    let newNote = {title:newTitle, employer:newBody, id:currUserId}
+    let URL = BASE_URL+'api/v1/jobs/'+id
     console.log(URL)
 
     return fetch(URL, {
@@ -117,7 +130,7 @@ handleClickNewBtn = () => {
   
   //Create new empty note object --- hard-coded UserID = 2 
   let newNote = {title:"Deafult Title", body:"Deafult Body", user_id:2}
-  let URL = BASE_URL+'api/v1/notes'
+  let URL = BASE_URL+'api/v1/jobs'
   console.log(URL)
 
   return fetch(URL, {
@@ -131,8 +144,8 @@ handleClickNewBtn = () => {
 .then(response => response.json())
 .then(noteObj => 
   {
-    console.log(noteObj)
-    // this.setState({allNotes: [...this.state.allNotes, noteObj]}) // parses JSON response into native JavaScript objects 
+    
+    this.setState({allNotes: [...this.state.allNotes, noteObj]}) // parses JSON response into native JavaScript objects 
 
 });
 }
