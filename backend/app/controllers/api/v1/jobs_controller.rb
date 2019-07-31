@@ -1,3 +1,5 @@
+require "byebug"
+
 class Api::V1::JobsController < ApplicationController
 
   before_action :set_Job, only: [:show,:update,:destroy]
@@ -8,12 +10,12 @@ class Api::V1::JobsController < ApplicationController
   end
 
   def create
-    @Job = Job.create(Job_params)
+    @Job = Job.create(job_params)
     render json: @Job, status: 201
   end
 
   def update
-    @Job.update(Job_params)
+    @Job.update(job_params)
     render json: @Job, status: 200
   end
 
@@ -27,7 +29,7 @@ class Api::V1::JobsController < ApplicationController
   end
 
   private
-  def Job_params
+  def job_params
     params.permit(:title, :employer, :Salary)
   end
 

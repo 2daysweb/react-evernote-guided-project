@@ -19,7 +19,7 @@ class Api::V1::UsersController < ApplicationController
   def destroy
     userId = @user.id
     @user.destroy
-    render json: {message:"Zap! user deleted", userId:userId}
+    # render json: {message:"Zap! user deleted", userId:userId}
   end
 
   def show
