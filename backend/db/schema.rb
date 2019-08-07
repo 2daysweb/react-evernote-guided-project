@@ -10,32 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190731040005) do
+ActiveRecord::Schema.define(version: 20190807003318) do
 
-  create_table "employers", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "jobs", force: :cascade do |t|
+  create_table "job_postings", force: :cascade do |t|
+    t.boolean  "is_approved"
+    t.string   "is_active"
+    t.string   "bio"
     t.string   "title"
-    t.string   "employer"
-    t.integer  "Salary"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "industry"
+    t.string   "job_type"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "user_jobs", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "job_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "job_posting_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "username"
+    t.string   "email"
     t.string   "password_digest"
+    t.string   "avatar"
+    t.string   "bio"
+    t.boolean  "can_invite"
+    t.string   "resume"
+    t.string   "user_type"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end

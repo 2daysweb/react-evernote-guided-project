@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import NoteList from './NoteList';
+import JobList from './JobList';
 
 class Sidebar extends Component {
   render() {
     return (
       <div className='master-detail-element sidebar'>
-        <NoteList  
-                 allNotes={this.props.allNotes}
-                 filteredNotes={this.props.filteredNotes}
-                 showNote={this.props.showNote}
-                 editNote={this.props.editNote}
-                 currNote={this.props.currNote}
+        <JobList  
+                 allJobs={this.props.allJobs}
+                 filteredJobs={this.props.filteredJobs}
+                 showJob={this.props.showJob}
+                 editJob={this.props.editJob}
+                 currJob={this.props.currJob}
 
         />
-        <button onClick={this.props.newNote}>New</button>
+        <button onClick={this.props.newJob}>New</button>
       </div>
     );
   }

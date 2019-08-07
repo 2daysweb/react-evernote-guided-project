@@ -190,3 +190,14 @@ button:hover, .nav-bar:hover, input[type="submit"]:hover {
 button:focus, input[type="submit"]:focus {
   outline: none;
 }
+
+@media all and (min-width: 480px) {
+  .Login {
+    padding: 60px 0;
+  }
+
+  .Login form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
+}

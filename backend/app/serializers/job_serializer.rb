@@ -1,4 +1,4 @@
-class NoteSerializer < ActiveModel::Serializer
+class JobSerializer < ActiveModel::Serializer
   attributes :id, :title, :body
 
   belongs_to :user

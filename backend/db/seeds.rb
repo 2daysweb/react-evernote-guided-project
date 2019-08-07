@@ -5,25 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-# User.destroy_all
-u = User.create(username: ENV['USER'])
 
-# Job.destroy_all
-# Employer.destroy_all
-user_1 = User.create(username:"test_user_1", password:"test_pw_1") 
-job_1 = Job.create(title:"Mid-Senior Full Stack Web Developer" , employer:"Goldman Sachs ---- Desired Skills: HTML/CSS/Ruby/Javascript/ReactDOM", Salary:100000)
-UserJob.create(user_id:16, job_id:19)
-
-
-user_2 = User.create(username:"test_user_2", password:"test_pw_2") 
-job_2 = Job.create(title:"Junior Web Developer", employer:"UBS  ---- Desired Skills: HTML/CSS/Ruby/Javascript/ReactDOM", Salary:100000)
-UserJob.create(user_id:16, job_id:20)
-
-user_3 = User.create(username:"test_user_3", password:"test_pw_3") 
-job_1 = Job.create(title:"Jr. Web Developer (Javascript/React)", employer:"Bank of America ---- Desired Skills: HTML/CSS/Ruby/Javascript/ReactDOM", Salary:100000)
-UserJob.create(user_id:17, job_id:21)
-
-
-user_4 = User.create(username:"test_user_2", password:"test_pw_2") 
-job_2 = Job.create(title:"Senior Javascript Developer", employer:"Capital One ---- Desired Skills: HTML/CSS/Ruby/Javascript/ReactDOM", Salary:100000)
-UserJob.create(user_id:17, job_id:22)
+User.destroy_all
+UserJob.destroy_all
+JobPosting.destroy_all 
+# u = User.create(email: ENV['USER'])
+user_1 = User.create(email: "sahnunhm@gmail.com", password:"pw1", user_type:"employer", avatar:"", bio:"", can_invite:true, resume:"")
+job_posting_1 = JobPosting.create(is_approved:true, is_active:true, title:"Senior NET Developer", industry:"Software Engineering", job_type:"full time")
+user_job_1 = UserJob.create(user_id:user_1.id, job_posting_id:job_posting_1.id)

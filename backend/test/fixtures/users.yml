@@ -1,9 +1,27 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  username: MyString
+  rails: MyString
+  g: MyString
+  model: MyString
+  User: MyString
+  email: MyString
   password_digest: MyString
+  avatar: MyString
+  bio: MyString
+  can_invite: false
+  resume: MyString
+  type: 
 
 two:
-  username: MyString
+  rails: MyString
+  g: MyString
+  model: MyString
+  User: MyString
+  email: MyString
   password_digest: MyString
+  avatar: MyString
+  bio: MyString
+  can_invite: false
+  resume: MyString
+  type: 

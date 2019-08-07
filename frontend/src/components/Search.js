@@ -4,9 +4,9 @@ const Search = (props) => {
   return (
     <div className="filter">
       <input onChange={(e)=> props.handleChangeSearchText(e)}
-        id="search-bar"
+        // id="search-bar"
         type="text"
-        placeholder="Search Notes"
+        placeholder="Search Jobs"
       />
     </div>
   );
